@@ -85,7 +85,7 @@ BASE="@${PUBLIC_IP}:${HYSTERIA_PORT}/?insecure=1&sni=www.cloudflare.com&obfs=sal
 install -d -m 700 "$STAGE_DIR/access"
 printf 'Panel: http://10.8.0.1:%s/\nPassword: %s\nAWG endpoint: %s:%s/udp\n' \
   "$PANEL_PORT" "$PANEL_PASSWORD" "$PUBLIC_IP" "$AWG_PORT" > "$STAGE_DIR/access/panel.txt"
-printf '%s\n' "$AWG_LINK" > "$STAGE_DIR/access/awg-admin.txt"
+printf '%s\n' "$AWG_LINK" | python3 "$(dirname "$(realpath "$0")")/fix-amnezia-profile.py" - "$STAGE_DIR/access/awg-admin.txt"
 printf 'hysteria2://primary:%s%s#HY2-PRIMARY\n' "$HY2_PRIMARY" "$BASE" > "$STAGE_DIR/access/hysteria-primary.txt"
 : > "$STAGE_DIR/access/hysteria-users.txt"
 for ((i=1; i<=HYSTERIA_USERS; i++)); do

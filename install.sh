@@ -92,7 +92,7 @@ trap on_error ERR
 export DEBIAN_FRONTEND=noninteractive
 log 'Installing required packages'
 apt-get update -qq > "$STAGE_DIR/apt.log" 2>&1
-apt-get install -yq --no-install-recommends ca-certificates curl git openssl nftables nginx docker.io docker-compose-v2 > "$STAGE_DIR/apt.log" 2>&1
+apt-get install -yq --no-install-recommends ca-certificates curl git openssl nftables nginx python3 docker.io docker-compose-v2 > "$STAGE_DIR/apt.log" 2>&1
 systemctl enable --now docker > "$STAGE_DIR/docker.log" 2>&1
 
 log 'Installing pinned AWG-Easy 3'
